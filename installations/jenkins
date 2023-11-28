@@ -8,3 +8,8 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update -y
 sudo apt-get install jenkins -y
+
+change port from 8080 to 8089
+sudo vi /lib/systemd/system/jenkins.service
+sudo systemctl daemon-reload
+sudo systemctl restart jenkins
