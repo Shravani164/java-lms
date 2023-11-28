@@ -1,0 +1,35 @@
+pipeline {
+    agent {
+        label 'docker'
+    }
+environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+}
+stages {
+    stage('building frontend') {
+        steps {
+            sh 'docker build -t akhilteja87/lms-frontend .'
+        }
+    }
+    stage('docker login'){
+        steps{
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
+    }
+    stage('pushing to dockerhub') {
+        steps {
+            sh 'docker push akhilteja87/lms-frontend'
+        }
+    }
+    stage('removing old dockerimage') {
+        steps {
+            sh 'docker rmi -f akhiltejs87/lms-frontend'
+        }
+    }
+     stage('runing docker container') {
+        steps {
+            sh 'docker container run -dt --name lmsfn --network lmsnetwork -p 80:80 akhilteja87/lms-frontend'
+        }
+     }
+   }
+}
