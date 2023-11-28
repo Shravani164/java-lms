@@ -1,14 +1,13 @@
 pipeline {
-    agent {
-        label 'docker'
-    }
+    agent any
+    
 environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
 }
 stages {
     stage('building frontend') {
         steps {
-            sh 'docker build -t akhilteja87/lms-frontend .'
+            sh 'docker build -t shravaniii/lms-frontend .'
         }
     }
     stage('docker login'){
@@ -18,17 +17,17 @@ stages {
     }
     stage('pushing to dockerhub') {
         steps {
-            sh 'docker push akhilteja87/lms-frontend'
+            sh 'docker push shravaniii/lms-frontend'
         }
     }
     stage('removing old dockerimage') {
         steps {
-            sh 'docker rmi -f akhiltejs87/lms-frontend'
+            sh 'docker rmi -f shravaniii/lms-frontend'
         }
     }
      stage('runing docker container') {
         steps {
-            sh 'docker container run -dt --name lmsfn --network lmsnetwork -p 80:80 akhilteja87/lms-frontend'
+            sh 'docker container run -dt --name lmsfn --network lmsnetwork -p 80:80 shravaniii/lms-frontend'
         }
      }
    }
