@@ -7,7 +7,7 @@ pipeline {
         stage('Building the Docker image') {
             steps {
                 script {
-                    sh 'cd LMS-BE && docker build -t shravaniii/backend-java ${WORKSPACE}/LMS-BE'
+                    sh 'docker build -t shravaniii/backend-java .'
                 }
             }
         }
