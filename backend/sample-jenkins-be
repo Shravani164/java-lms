@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
+    stages {
+        stage('Building the Docker image') {
+            steps {
+                script {
+                    sh 'cd LMS-BE && docker build -t shravaniii/backend-java ${WORKSPACE}/LMS-BE'
+                }
+            }
+        }
+    }
+}
