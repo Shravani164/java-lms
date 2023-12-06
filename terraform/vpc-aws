@@ -10,76 +10,76 @@ resource "aws_vpc" "lms" {
 
 # Public Subnet
 resource "aws_subnet" "lms-pub-sn" {
-  vpc_id     = aws_vpc.ecomm.id
+  vpc_id     = aws_vpc.lms.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "true"
 
   tags = {
-    Name = "ecomm-public-subnet"
+    Name = "lms-public-subnet"
   }
 }
 
 # Private Subnet
-resource "aws_subnet" "ecomm-pvt-sn" {
-  vpc_id     = aws_vpc.ecomm.id
+resource "aws_subnet" "lms-pvt-sn" {
+  vpc_id     = aws_vpc.lms.id
   cidr_block = "10.0.2.0/24"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = "false"
 
   tags = {
-    Name = "ecomm-private-subnet"
+    Name = "lms-private-subnet"
   }
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "ecomm-igw" {
-  vpc_id = aws_vpc.ecomm.id
+resource "aws_internet_gateway" "lms-igw" {
+  vpc_id = aws_vpc.lms.id
 
   tags = {
-    Name = "ecomm-internet-gateway"
+    Name = "lms-internet-gateway"
   }
 }
 
 # Public Route Table
-resource "aws_route_table" "ecomm-pub-rt" {
-  vpc_id = aws_vpc.ecomm.id
+resource "aws_route_table" "lms-pub-rt" {
+  vpc_id = aws_vpc.lms.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.ecomm-igw.id
+    gateway_id = aws_internet_gateway.lms-igw.id
   }
 
   tags = {
-    Name = "ecomm-public-route-table"
+    Name = "lms-public-route-table"
   }
 }
 
 # Public Route Table Association
-resource "aws_route_table_association" "ecomm-pub-asc" {
-  subnet_id      = aws_subnet.ecomm-pub-sn.id
-  route_table_id = aws_route_table.ecomm-pub-rt.id
+resource "aws_route_table_association" "lms-pub-asc" {
+  subnet_id      = aws_subnet.lms-pub-sn.id
+  route_table_id = aws_route_table.lms-pub-rt.id
 }
 
 # Private Route Table
-resource "aws_route_table" "ecomm-pvt-rt" {
-  vpc_id = aws_vpc.ecomm.id
+resource "aws_route_table" "lms-pvt-rt" {
+  vpc_id = aws_vpc.lms.id
 
   tags = {
-    Name = "ecomm-private-route-table"
+    Name = "lms-private-route-table"
   }
 }
 
 # Private Route Table Association
-resource "aws_route_table_association" "ecomm-pvt-asc" {
-  subnet_id      = aws_subnet.ecomm-pvt-sn.id
-  route_table_id = aws_route_table.ecomm-pvt-rt.id
+resource "aws_route_table_association" "lms-pvt-asc" {
+  subnet_id      = aws_subnet.lms-pvt-sn.id
+  route_table_id = aws_route_table.lms-pvt-rt.id
 }
 
 # Public NACL
-resource "aws_network_acl" "ecomm-pub-nacl" {
-  vpc_id = aws_vpc.ecomm.id
-  subnet_ids = [aws_subnet.ecomm-pub-sn.id]
+resource "aws_network_acl" "lms-pub-nacl" {
+  vpc_id = aws_vpc.lms.id
+  subnet_ids = [aws_subnet.lms-pub-sn.id]
 
   egress {
     protocol   = "tcp"
@@ -100,14 +100,14 @@ resource "aws_network_acl" "ecomm-pub-nacl" {
   }
 
   tags = {
-    Name = "ecomm-public-nacl"
+    Name = "lms-public-nacl"
   }
 }
 
 # Private NACL
-resource "aws_network_acl" "ecomm-pvt-nacl" {
-  vpc_id = aws_vpc.ecomm.id
-  subnet_ids = [aws_subnet.ecomm-pvt-sn.id]
+resource "aws_network_acl" "lms-pvt-nacl" {
+  vpc_id = aws_vpc.lms.id
+  subnet_ids = [aws_subnet.lms-pvt-sn.id]
 
   egress {
     protocol   = "tcp"
@@ -128,15 +128,15 @@ resource "aws_network_acl" "ecomm-pvt-nacl" {
   }
 
   tags = {
-    Name = "ecomm-private-nacl"
+    Name = "lms-private-nacl"
   }
 }
 
 # Public Secuirty Group
-resource "aws_security_group" "ecomm-pub-sg" {
-  name        = "ecomm-web"
+resource "aws_security_group" "lms-pub-sg" {
+  name        = "lms-web"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.ecomm.id
+  vpc_id      = aws_vpc.lms.id
 
   ingress {
     description      = "SSH from WWW"
@@ -161,6 +161,6 @@ ingress {
   }
 
   tags = {
-    Name = "ecomm-pub-firewall"
+    Name = "lms-pub-firewall"
   }
 }
