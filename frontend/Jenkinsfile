@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+   stages {
+       stage('Docker build') {
+            steps {
+                sh 'cd lms-fe/lmsv1 && docker build -t frontend .'
+            }
+        }
+       stage('Docker remove') {
+            steps {
+                sh 'docker container rm -f fe'
+            }
+        }
+        stage('container run') {
+            steps {
+                sh 'docker container run -dt --name fe -p 80:80 frontend'
+           }
+        }
+    }
+}
