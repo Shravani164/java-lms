@@ -1,0 +1,5 @@
+#docker
+replace localhost with ip address
+
+#jenkins
+replace localhost with localhost
