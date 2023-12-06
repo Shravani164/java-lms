@@ -1,3 +1,9 @@
+# Create an AWS key pair using the generated public key
+resource "aws_key_pair" "ecomm_keypair" {
+  key_name   = "ecomm-key"
+  public_key = local_file.ecomm_key_public.content
+}
+
 # EC2 Server Setup - Web App Hosting
 resource "aws_instance" "lms-server" {
   ami           = "ami-0430580de6244e02e"
