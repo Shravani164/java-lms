@@ -1,17 +1,17 @@
 # Create an AWS key pair using the generated public key
-resource "aws_key_pair" "ecomm_keypair" {
-  key_name   = "ecomm-key"
-  public_key = local_file.ecomm_key_public.content
+resource "aws_key_pair" "lms_keypair" {
+  key_name   = "lms-key"
+  public_key = local_file.lms_key_public.content
 }
 
 # EC2 Server Setup - Web App Hosting
 resource "aws_instance" "lms-server" {
   ami           = "ami-0430580de6244e02e"
   instance_type = "t2.medium"
-  subnet_id = aws_subnet.ecomm-subnet.id
+  subnet_id = aws_subnet.lms-subnet.id
   key_name = "lms-key"
-  vpc_security_group_ids = [aws_security_group.ecomm-sg.id]
+  vpc_security_group_ids = [aws_security_group.lms-sg.id]
   tags = {
-    Name = "ecomm-server"
+    Name = "lms-server"
   }
 }
