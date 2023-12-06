@@ -1,18 +1,12 @@
-# Use the official OpenJDK 17 base image
+# Use the official OpenJDK 17 image as the base image
 FROM openjdk:17
-# Set the working directory in the container
+# Set the working directory to /app
 WORKDIR /app
-# Copy the entire project into the container
+# Copy the current directory contents into the container at /app
 COPY . .
-# Grant execute permission to Maven wrapper
-# RUN chmod +x mvnw
-# to pass database credentials using docker arguments
-# ARG SPRING_DATASOURCE_URL
-# ARG SPRING_DATASOURCE_USERNAME
-# ARG SPRING_DATASOURCE_PASSWORD
-# Build the application using Maven wrapper
+# Build the application with Maven
 RUN ./mvnw package
-# Expose port 8080
+# Expose the port the app runs on
 EXPOSE 8080
-# Command to run the Spring Boot application when the container starts
+# Command to run the application
 CMD ["java", "-jar", "target/LMS-0.0.1-SNAPSHOT.jar"]
