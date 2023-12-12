@@ -1,0 +1,22 @@
+#installation
+
+sudo apt -y install ansible
+
+#shows all nodes that are in machine
+ansible --list-hosts all
+
+#inventory file stores all node info
+cat /etc/ansible/hosts
+
+sudo vi /etc/ansible/hosts
+#10.0.0.0
+#10.0.0.1
+
+sudo vi /etc/ansible/hosts
+#[g1]
+#10.0.0.0
+#10.0.0.1
+
+ansible --list-hosts all g1 #displays as shown below
+10.0.0.0
+10.0.0.1
