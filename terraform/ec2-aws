@@ -1,4 +1,4 @@
-# Create an AWS key pair using the generated public key
+# Create an AWS key pair using generated public key
 resource "aws_key_pair" "lms_keypair" {
   key_name   = "lms-key"
   public_key = local_file.lms_key_public.content
