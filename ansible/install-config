@@ -24,5 +24,18 @@ ansible --list-hosts all g1 #displays as shown below
 #communicate with all the nodes and groups 
 ansible all -m ping
 
+#to create host with ssh
+n1 ansible_host=40.81.26.213 ansible_user=ubuntu ansible_ssh_private_key_file=/home/azureuser/lms-key.pem
 
+#to send pem key from local lap to our server
+scp -i lms-key.pem lms-key.pem azureuser@40.81.26.213:~
+
+#to create a file
+ansible n1 -m file -a "path=/home/azureuser/<dir-name> state=directory"
+
+#using command module you can run the commands
+ansible n1 -m command -a "ls"
+
+#to give sudo previleges should add -b at end[b stands for become
+-b
 
