@@ -17,7 +17,8 @@ sudo vi /etc/ansible/hosts
 #10.0.0.0
 #10.0.0.1
 
-ansible --list-hosts all g1 #displays as shown below
+#displays as shown below
+ansible --list-hosts all g1 
 10.0.0.0
 10.0.0.1
 
