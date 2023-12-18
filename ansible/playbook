@@ -20,3 +20,4 @@ ansible-playbook playbook-yml
 ansible n1 -m setup
 ansible n1 -m setup | grep -w ansible_distribution
 ansible n1 -m setup | grep -w ansible_hostname
+ansible n1 -m setup | grep -w http_port
