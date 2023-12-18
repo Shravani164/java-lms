@@ -40,3 +40,12 @@ ansible n1 -m command -a "ls"
 #to give sudo previleges should add -b at end[b stands for become
 -b
 
+#ADHOC COMMANDS
+ansible n1 -m apt -a "name= nginx state=present" -b
+ansible n1 -m command -a "systemctl status nginx" -b
+ansible n1 -m service -a "name= nginx state=started" -b
+ansible n1 -m apt -a "name= git state=present" -b
+ansible n1 -m git -a "dest= /var/www/html repo= <url>" -b
+
+
+
