@@ -1,0 +1,22 @@
+#PLAYBOOKS
+EX-- ansible n1 -m file -a "path=/home/ubuntu/dir-1 state=directory"
+
+sudo vi playbook-yml
+---
+- name: Play for Updating n1
+  hosts: n1
+
+  tasks:
+  - name: Ensure directory present
+    file:
+      path: /home/ubuntu/dir-1
+      state: directory
+...
+
+#to execute the playbook 
+ansible-playbook playbook-yml
+
+#setup module captures the use info like user id, aws, core...
+ansible n1 -m setup
+ansible n1 -m setup | grep -w ansible_distribution
+ansible n1 -m setup | grep -w ansible_hostname
