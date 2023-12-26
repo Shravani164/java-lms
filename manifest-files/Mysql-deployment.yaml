@@ -16,16 +16,16 @@ spec:
         - name: mysql
           image: mysql:latest
           env:
-            - name: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD  #setting root password of mysql
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
-                  key: mysql-root-password
+                  name: mysql-root-secret  #name of the secret
+                  key: password  #'key' inside the Secret which contains required 'value'
           ports:
             - containerPort: 3306
-          volumeMounts:
+          volumeMounts:   #mounting volume obtained from Persistant Volume Claim
             - name: mysql-persistent-storage
-              mountPath: /var/lib/mysql
+              mountPath: /var/lib/mysql    #this is the container on which the mounting will takes place
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
