@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: your-frontend-image:latest
+          image: shravaniii/mini-fe
           env:
             - name: BACKEND_HOST
               value: "backend-service"
