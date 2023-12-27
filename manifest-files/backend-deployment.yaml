@@ -1,26 +1,21 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
-  name: lms-backend-deployment
+  name: backend-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: lms-backend
+      app: backend
   template:
     metadata:
       labels:
-        app: lms-backend
+        app: backend
     spec:
       containers:
-        - name: lms-backend
+        - name: backend
           image: shravaniii/mini-be
           envFrom:
-            - name: MYSQL_ROOT_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL-ROOT-USER
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
