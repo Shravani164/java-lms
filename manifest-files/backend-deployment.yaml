@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: lms-backend
-          image: akhilteja87/backend1
+          image: shravaniii/mini-be
           envFrom:
             - name: MYSQL_ROOT_USER
               valueFrom:
