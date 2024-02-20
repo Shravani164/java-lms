@@ -1,3 +1,4 @@
+
 sudo apt update -y
 sudo apt install openjdk-17-jdk
 java --version
@@ -10,6 +11,8 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 sudo systemctl status jenkins
 
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
 change port from 8080 to 8089
 sudo vi /lib/systemd/system/jenkins.service
 sudo systemctl daemon-reload
@@ -18,5 +21,5 @@ sudo systemctl restart jenkins
 sudo visudo
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
 
