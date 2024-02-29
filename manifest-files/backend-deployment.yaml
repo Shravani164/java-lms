@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: shravaniii/new-be
+        image: shravaniii/java-be
         envFrom:
         - secretRef:
             name: mysql-secret
