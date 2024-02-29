@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: shravaniii/mini-fe
+          image: shravaniii/java-fe
           env:
             - name: BACKEND_HOST
               value: "backend-service"
